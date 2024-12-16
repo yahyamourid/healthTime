@@ -1,5 +1,4 @@
-# Stage 1: Build the application with Node.js
-FROM node:18-alpine as builder
+FROM node:18 as builder
 WORKDIR /app
 COPY . .
 RUN npm install
