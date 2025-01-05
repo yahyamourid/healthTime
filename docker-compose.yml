@@ -1,31 +1,51 @@
+
 services:
   mysql:
     image: mysql:latest
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: healthtime
+      MYSQL_DATABASE: healthTime
       max_allowed_packet: 64M
     ports:
-      - "3306:3306"
+      - "3306:3306" 
+    volumes:    
+      - ./healthTime.sql:/docker-entrypoint-initdb.d/healthTime.sql
+    networks:
+      - health-time-net
+    restart: always
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    depends_on:
+      - mysql
+    ports:
+      - "8087:80"
+    networks:
+      - health-time-net
+
     
 
   backend:
     build:
       context: ./healthtime-backend
     ports:
-      - "9090:9090"
+      - "8888:8888"
     depends_on:
       mysql:
         condition: service_started
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/healthtime
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/healthTime
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-    healthcheck:
-      test: "/usr/bin/mysql --user=root --password= --execute \"SHOW DATABASES;\""
-      interval: 5s
-      timeout: 2s
-      retries: 100
+    networks:
+      - health-time-net
+    restart: always
 
   frontend:
     build:
@@ -33,15 +53,8 @@ services:
     ports:
       - "5173:5173"
     depends_on:
-      backend:
-        condition: service_started
+      - backend
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: root
-      UPLOAD_LIMIT: 300M
-    ports:
-      - "8081:80"
+networks:
+  health-time-net:
+    driver: bridge

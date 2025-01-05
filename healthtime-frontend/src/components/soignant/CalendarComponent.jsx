@@ -25,7 +25,6 @@ const messages = {
   next: "Suivant",
   today: "Aujourd'hui",
   month: "Mois",
-  week: "Semaine",
   day: "Jour",
   agenda: "Agenda",
   date: "Date",

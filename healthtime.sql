@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 16 déc. 2024 à 18:26
+-- Généré le : Dim 05 jan. 2025 à 14:57
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `healthtime`
 --
-
+CREATE DATABASE IF NOT EXISTS healthTime;
+USE healthTime;
 -- --------------------------------------------------------
 
 --
@@ -52,22 +53,23 @@ CREATE TABLE `allergie` (
 
 CREATE TABLE `analyse` (
   `id` int(11) NOT NULL,
-  `type_analyse` varchar(255) DEFAULT NULL,
   `consultation_id` int(11) DEFAULT NULL,
-  `nom` varchar(255) DEFAULT NULL
+  `nom` varchar(255) DEFAULT NULL,
+  `valeur` float NOT NULL,
+  `unite` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `analyse`
 --
 
-INSERT INTO `analyse` (`id`, `type_analyse`, `consultation_id`, `nom`) VALUES
-(2, NULL, 2, 'Hémogramme complet'),
-(3, NULL, 2, 'Glycémie à jeun'),
-(4, NULL, 4, 'string1'),
-(5, NULL, 4, 'string2'),
-(6, NULL, 5, 'string1'),
-(7, NULL, 5, 'string2');
+INSERT INTO `analyse` (`id`, `consultation_id`, `nom`, `valeur`, `unite`) VALUES
+(2, 2, 'Hémogramme complet', 11, 'mol'),
+(3, 2, 'Glycémie à jeun', 0, NULL),
+(4, 4, 'Bilan thyroïdien ', 122, 'nmol'),
+(5, 4, 'Bilan de la vitamine D', 0, NULL),
+(6, 5, 'gaz sanguin', 0, NULL),
+(7, 5, 'Hémogramme complet', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,7 +232,6 @@ CREATE TABLE `message` (
 
 CREATE TABLE `ordonnance` (
   `id` int(11) NOT NULL,
-  `medicaments` varbinary(255) DEFAULT NULL,
   `consultation_id` int(11) DEFAULT NULL,
   `medicament` varchar(255) DEFAULT NULL,
   `dose` int(11) NOT NULL,
@@ -242,17 +243,17 @@ CREATE TABLE `ordonnance` (
 -- Déchargement des données de la table `ordonnance`
 --
 
-INSERT INTO `ordonnance` (`id`, `medicaments`, `consultation_id`, `medicament`, `dose`, `commentaire`, `methode`) VALUES
-(2, NULL, 2, 'Paracétamol 500mg', 3, 'Pour soulager la douleur.', 'après le repas'),
-(3, NULL, 2, 'Amoxicilline 500mg', 2, 'Antibiotique pour prévenir une infection.', 'avant le repas'),
-(4, NULL, 2, 'Ibuprofène 400mg', 3, 'Anti-inflammatoire pour réduire le gonflement.', 'après le repas'),
-(5, NULL, 5, 'string1111', 0, 'string', 'string'),
-(6, NULL, 5, 'string22', 0, 'string22', 'strin22g'),
-(7, NULL, 6, 'qwqwq', 1, '', 'Avant'),
-(8, NULL, 6, 'ssaswqw', 3, '', 'Après'),
-(9, NULL, 7, 'dsds', 1, '', 'Avant'),
-(10, NULL, 7, '', 0, '', 'Avant'),
-(11, NULL, 8, 'medi2', 2, '', 'Avant');
+INSERT INTO `ordonnance` (`id`, `consultation_id`, `medicament`, `dose`, `commentaire`, `methode`) VALUES
+(2, 2, 'Paracétamol 500mg', 3, 'Pour soulager la douleur.', 'après le repas'),
+(3, 2, 'Amoxicilline 500mg', 2, 'Antibiotique pour prévenir une infection.', 'avant le repas'),
+(4, 2, 'Ibuprofène 400mg', 3, 'Anti-inflammatoire pour réduire le gonflement.', 'après le repas'),
+(5, 5, 'Oméprazole', 1, 'string', ' avant le repas'),
+(6, 5, 'Ventoline', 3, 'string22', 'après le repas'),
+(7, 6, 'Amoxicilline', 1, '', 'avant le repas'),
+(8, 6, 'Oméprazole', 3, '', 'après le repas'),
+(9, 7, 'Spasfon', 1, '', 'après le repas'),
+(10, 7, 'Ibuprofène', 2, '', 'avant le repas'),
+(11, 8, 'Augmentin', 2, '', 'après le repas');
 
 -- --------------------------------------------------------
 
@@ -469,11 +470,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `code_expiration_time`, `email`, `is_block`, `is_password_changed`, `nom`, `password`, `prenom`, `verification_code`, `role_id`, `date_inscription`) VALUES
 (1, NULL, 'admin@gmail.com', b'0', b'0', 'admin', '$2a$10$DbrGCZomENCcJhFQL/Pz4uy3syDH3N.4mi9JAAeL6lxPQlx.Xjqb.', 'admin', NULL, 1, NULL),
-(3, NULL, 'mouridyahya180@gmail.com', b'0', b'0', 'Ayoubi', '$2a$10$./m2.tcplqKQiwu.Nspodeatp6mlaFTikbOwNcpX.N13Gtos7mFwa', 'Alae', NULL, 3, NULL),
+(3, NULL, 'ayoubi@gmail.com', b'0', b'0', 'Ayoubi', '$2a$10$./m2.tcplqKQiwu.Nspodeatp6mlaFTikbOwNcpX.N13Gtos7mFwa', 'Alae', NULL, 3, NULL),
 (5, NULL, 'rakine@gmail.com', b'0', b'0', 'Rakine', '$2a$10$DbrGCZomENCcJhFQL/Pz4uy3syDH3N.4mi9JAAeL6lxPQlx.Xjqb.', 'Ayoub', NULL, 2, '2024-11-10 00:08:58.000000'),
 (6, NULL, 'zakariaelh@gmail.com', b'1', b'0', 'Elharchi', '$2a$10$aQbe34lazTIX0n2oLe1TpubohP5U6IYklxWlmb0EOozY7ZEp9HMKi', 'Zakaria', NULL, 2, '2024-11-12 00:08:51.000000'),
 (7, NULL, 'ymoujib@gmail.com', b'0', b'0', 'Moujib', '$2a$10$ttwE16.0FUQAGBaNDmIQO.qbZfewhs9Wqqka.InZe1EePe.1GLvMy', 'Youss', NULL, 3, NULL),
-(8, NULL, 'mouridyahya380@gmail.com', b'0', b'0', 'Rami', '$2a$10$./m2.tcplqKQiwu.Nspodeatp6mlaFTikbOwNcpX.N13Gtos7mFwa', 'Rachid', NULL, 2, '2024-11-12 00:08:26.000000'),
+(8, NULL, 'rami@gmail.com', b'0', b'0', 'Rami', '$2a$10$./m2.tcplqKQiwu.Nspodeatp6mlaFTikbOwNcpX.N13Gtos7mFwa', 'Rachid', NULL, 2, '2024-11-12 00:08:26.000000'),
 (9, NULL, 'wew@gmail.com', b'0', b'0', 'wwwee', '$2a$10$VOXPXp0v.9vUmRMnaeGdh.RTwi744MjJxxgOZ5s004bCthrbho6Yq', 'wewe', NULL, 2, '2024-11-13 00:06:12.000000'),
 (10, NULL, 'mouridyahya480@gmail.com', b'0', b'0', 'Mourid', '$2a$10$DuDPAwddi.Yj2zfNr.1l6Ok5hVdTmcQXp0Gju1rrVDvrn4zFP5Eue', 'Yahya', NULL, 2, '2024-11-17 23:41:11.000000'),
 (11, NULL, 'amal180@gmail.com', b'0', b'0', NULL, '$2a$10$ttwE16.0FUQAGBaNDmIQO.qbZfewhs9Wqqka.InZe1EePe.1GLvMy', 'Amal', 'Iraoui', 3, NULL),

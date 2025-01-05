@@ -8,8 +8,25 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    host: true, // needed for the Docker Container port mapping to work
+    host: true,
     strictPort: true,
-    port: 5173, // you can replace this port with any port
-}
+    port: 5173,
+  },
+  build: {
+    rollupOptions: {
+      external: ['zxcvbn', 'zod'],
+      output: {
+        globals: {
+          zxcvbn: 'zxcvbn',
+          zod: 'Zod'
+        }
+      }
+    }
+  }
+  // ,
+  // build: {
+  //   rollupOptions: {
+  //     external: ['zxcvbn','zod']
+  //   }
+  // }
 })

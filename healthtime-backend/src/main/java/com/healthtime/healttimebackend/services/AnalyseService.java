@@ -41,11 +41,8 @@ public class AnalyseService implements IDao<Analyse> {
     public Analyse update(Analyse analyse) {
         Analyse existingAnalyse = analyseRepository.findById(analyse.getId())
                 .orElseThrow(() -> new NotFoundException("Analyse avec l'ID " + analyse.getId() + " introuvable"));
-
-        // existingAnalyse.setType(analyse.getType());
-        // existingAnalyse.setResultats(analyse.getResultats());
-        // Ajoutez ici d'autres champs à mettre à jour
-
+        existingAnalyse.setValeur(analyse.getValeur());
+        existingAnalyse.setUnite(analyse.getUnite());        
         return analyseRepository.save(existingAnalyse);
     }
 

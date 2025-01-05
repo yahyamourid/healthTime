@@ -24,6 +24,8 @@ public class Analyse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
+    private float valeur;
+    private String unite;
 
     @JsonIgnore
     @ManyToOne
