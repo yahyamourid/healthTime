@@ -44,10 +44,31 @@ Follow the steps below to launch the HealthTime project using Docker:
 ```
 
 ### Access the Services:
-- phpMyAdmin: http://localhost:8087
+- **phpMyAdmin**: http://localhost:8087
 Use the credentials:
 Username: root
 Password: root
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:8888
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:8888
+
+## Test Users
+
+The following test accounts are pre-configured in the system:
+
+### Administrator
+- **Email**: `admin@gmail.com`  
+- **Password**: `@healthTime`
+
+### Healthcare Providers (Soignants)
+- **Email**: `rakine@gmail.com`  
+- **Password**: `@healthTime`  
+- **Email**: `rami@gmail.com`  
+- **Password**: `@healthTime`  
+
+### Patients
+- **Email**: `ikram@gmail.com`  
+- **Password**: `@healthTime`  
+- **Email**: `ayoubi@gmail.com`  
+- **Password**: `@healthTime`
+
 
