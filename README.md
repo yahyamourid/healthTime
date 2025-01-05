@@ -50,7 +50,7 @@ Use the credentials:
 `Username: root`
 `Password: root`
 - **Frontend**: http://localhost:5173
-- **Backend API**: [http://localhost:8888/swagger-ui]
+- **Backend API**: http://localhost:8888/swagger-ui
 
 ## Test Users
 
