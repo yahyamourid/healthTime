@@ -35,7 +35,7 @@ Follow the steps below to launch the HealthTime project using Docker:
 
 1. **Clone the Repository**:
 ```
-   git clone <repository-url>
+   git clone https://github.com/yahyamourid/healthTime.git
    cd healthtime
 ```
 2. **Run the Application**:
