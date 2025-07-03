@@ -74,6 +74,8 @@ The following test accounts are pre-configured in the system:
 
 ## Demo
 
+![image](https://github.com/user-attachments/assets/0a79a624-46a5-456b-9dbf-05cc7a1e15e6)
+![image](https://github.com/user-attachments/assets/3b5065c3-7cfe-4eba-9280-da71f7daa1b6)
 
 
 
