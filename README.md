@@ -73,6 +73,9 @@ The following test accounts are pre-configured in the system:
 - **Password**: `@healthTime`
 
 ## Demo
-![image](https://github.com/user-attachments/assets/13a9fbeb-4793-41f3-8b13-c622c4db3ca2)
+![image](https://github.com/user-attachments/assets/38adc91a-d78d-4e32-8c87-b338667a96b0)
+![image](https://github.com/user-attachments/assets/ffdfed50-6de0-4a42-a9fb-25c2bc18734d)
+
+
 
 
