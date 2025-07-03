@@ -72,4 +72,7 @@ The following test accounts are pre-configured in the system:
 - **Email**: `ayoubi@gmail.com`  
 - **Password**: `@healthTime`
 
+## Demo
+![image](https://github.com/user-attachments/assets/13a9fbeb-4793-41f3-8b13-c622c4db3ca2)
+
 
